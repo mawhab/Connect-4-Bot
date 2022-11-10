@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Board.h"
+#include <utility>
 
 class Player{
     protected:

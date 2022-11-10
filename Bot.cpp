@@ -5,7 +5,7 @@ Bot::Bot(){
 }
 
 int Bot::move(Board *b){
-    Board* target = this->maximize(b);
+    Board* target = this->maximize(b).first;
     int* base_cols = b->get_col_spots();
     int* target_cols = target->get_col_spots();
     for(int i=0;i<b->get_cols();i++){
@@ -14,34 +14,32 @@ int Bot::move(Board *b){
     return 0;
 }
 
-Board* Bot::minimize(Board* b){
-    if(b->is_full()) return b;
+std::pair<Board*, int> Bot::minimize(Board* b){
+    if(b->is_full()) return std::pair<Board*, int>(nullptr, b->get_count().first);
 
-    Board* min_state = new Board();
-    Board* temp_state = nullptr;
-    min_state->set_cost(2147483000);
+    std::pair<Board*, int> min_found(nullptr, 2147483000);
+    std::pair<Board*, int> temp_state;
 
     for(auto x: b->get_neighbors()){
         temp_state = this->maximize(x);
-        if(temp_state->get_cost() < min_state->get_cost()){
-            min_state = temp_state;
+        if(temp_state.second < min_found.second){
+            min_found = temp_state;
         }
     }
-    return min_state;
+    return min_found;
 }
 
-Board* Bot::maximize(Board* b){
-    if(b->is_full()) return b;
+std::pair<Board*, int> Bot::maximize(Board* b){
+    if(b->is_full()) return std::pair<Board*, int>(nullptr, b->get_count().first);
 
-    Board* temp_state = nullptr;
-    Board* max_state = new Board();
-    max_state->set_cost(-2147483000);
+    std::pair<Board*, int> max_found(nullptr, -2147483000);
+    std::pair<Board*, int> temp_state;
 
     for(auto x: b->get_neighbors()){
         temp_state = this->minimize(x);
-        if(temp_state->get_cost() > max_state->get_cost()){
-            max_state = temp_state;
+        if(temp_state.second > max_found.second){
+            max_found = temp_state;
         }
     }
-    return max_state;
+    return max_found;
 }

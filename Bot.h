@@ -6,8 +6,8 @@ class Bot: public Player{
     public:
         Bot();
         int move(Board *b);
-        Board* minimize(Board* b);
-        Board* maximize(Board* b);
+        std::pair<Board*, int> minimize(Board* b);
+        std::pair<Board*, int> maximize(Board* b);
 };
 
 #endif

@@ -12,6 +12,8 @@ Board::Board(int rows, int cols){
     this->turn = false;
     this->depth = 0;
     this->cost = 0;
+    this->h = Human();
+    this->b = Bot();
 }
 
 Board::Board(){
@@ -29,6 +31,8 @@ Board::Board(){
     this->turn = false;
     this->depth = 0;
     this->cost = 0;
+    this->h = Human();
+    this->b = Bot();
 }
 
 Board::Board(Board* cpy){
@@ -55,12 +59,12 @@ void Board::move(){
     int move;
     if(this->turn){
         do{
-            move = h.move()-1;
+            move = this->h.move()-1;
         }while(!this->is_allowed(move));
         this->move(move);
     }else{
         do{
-            move = b.move(this)-1;
+            move = this->b.move(this)-1;
         }while(!this->is_allowed(move));
         this->move(move);
     }
