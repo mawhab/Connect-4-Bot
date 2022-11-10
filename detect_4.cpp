@@ -4,20 +4,37 @@
 #define m 7
 using namespace std;
 
-int main(){
-    int board[n][m] = { {0,0,0,0,0,0,0},
-                        {0,2,2,2,2,0,0},
-                        {1,0,1,0,0,1,0},
-                        {0,1,1,0,1,0,0},
-                        {0,0,1,1,0,0,0},
-                        {1,1,1,1,0,0,0}};
+class tst{
+    public:
+        int *x;
+        int s;
+        tst& operator=(tst cpy)noexcept{
+            if(this==&cpy) printf("same\n");
+            printf("here\n");
+            delete this->x;
+            this->x = nullptr;
+            this->x = new int[4];
+            this->s = 4;
+            std::copy(cpy.x, cpy.x + cpy.s, this->x);
+            return *this;
+        }
+};
 
-    int row[2][n] = {{0,0,0,0,0,0}, {0,0,0,0,0,0}};
-    int col[2][m] = {{0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}};
-    int diag_p[2][n] = {{0,0,0,0,0,0}, {0,0,0,0,0,0}};
-    int diag_n[2][n] = {{0,0,0,0,0,0}, {0,0,0,0,0,0}};
-    int count[] = {0,0};
+int board[n][m] = { {0,0,0,0,0,0,0},
+                    {0,2,2,2,2,0,0},
+                    {1,0,1,0,0,1,0},
+                    {0,1,1,0,1,0,0},
+                    {0,0,1,1,0,0,0},
+                    {1,1,1,1,0,0,0}};
 
+int row[2][n] = {{0,0,0,0,0,0}, {0,0,0,0,0,0}};
+int col[2][m] = {{0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}};
+int diag_p[2][n] = {{0,0,0,0,0,0}, {0,0,0,0,0,0}};
+int diag_n[2][n] = {{0,0,0,0,0,0}, {0,0,0,0,0,0}};
+int count[] = {0,0};
+
+
+void find(){
     for(int i=0;i<n;i++){
         for(int j=0;j<m;j++){
             char dp_i = j - i + 2;
@@ -56,6 +73,22 @@ int main(){
             }
         }
     }
+}
+
+int main(){
+    // for(int x=0;x<2000;x++){
+    //     count[0] = 0;
+    //     count[1] = 0;
+    //     find();
+    // }
+    tst y;
+    y.s = 4;
+    y.x = new int[4];
+    y.x[0] = 4;
+    tst z;
+    z.operator=(y);    
+    z.x[0] = 6;
+    printf("%x -- %x\n", y.x[0], z.x[0]);
     cout << count[0] << endl;
     cout << count[1] << endl;
 }
