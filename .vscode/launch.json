@@ -28,14 +28,14 @@
         "name": "(gdb) Launch",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/tst.exe",
+        "program": "${workspaceFolder}/test.out",
         "args": [],
         "stopAtEntry": false,
         "cwd": "${fileDirname}",
         "environment": [],
         "externalConsole": false,
         "MIMode": "gdb",
-        "miDebuggerPath": "c:\\MinGW\\bin\\gdb.exe",
+        "miDebuggerPath": "/usr/bin/gdb",
         "setupCommands": [
             {
                 "description": "Enable pretty-printing for gdb",

@@ -1,6 +1,6 @@
 #include "Board.h"
 
-Board::Board(int rows, int cols){
+Board::Board(int rows, int cols) : b(5), h(){
     this->rows = rows;
     this->cols = cols;
     this->board = new int*[this->rows];
@@ -12,11 +12,9 @@ Board::Board(int rows, int cols){
     this->turn = false;
     this->depth = 0;
     this->cost = 0;
-    this->h = Human();
-    this->b = Bot();
 }
 
-Board::Board(){
+Board::Board() : b(5), h(){
     this->rows = 6;
     this->cols = 7;
     this->board = new int*[this->rows];
@@ -31,8 +29,6 @@ Board::Board(){
     this->turn = false;
     this->depth = 0;
     this->cost = 0;
-    this->h = Human();
-    this->b = Bot();
 }
 
 Board::Board(Board* cpy){
@@ -64,7 +60,7 @@ void Board::move(){
         this->move(move);
     }else{
         do{
-            move = this->b.move(this)-1;
+            move = this->b.move(this);
         }while(!this->is_allowed(move));
         this->move(move);
     }
@@ -88,7 +84,7 @@ std::vector<Board*> Board::get_neighbors(){
             neighbors.push_back(temp);
         }
     }
-    delete temp;
+    // delete temp;
 
     return neighbors;
 }
@@ -197,4 +193,14 @@ std::pair<int,int> Board::get_count(){
     }
 
     return std::pair<int,int>(count[0], count[1]);
+}
+
+// prints complete board
+void Board::print_board(){
+    for(int i=0;i<6;i++){
+        for(int j=0;j<7;j++){
+            std::cout << this->board[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
 }

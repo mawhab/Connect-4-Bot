@@ -34,5 +34,6 @@ class Board{
         int get_cols();
         int* get_col_spots();
         std::pair<int,int> get_count();
+        void print_board();
 };
 #endif

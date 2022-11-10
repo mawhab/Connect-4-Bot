@@ -1,7 +1,11 @@
 #include "Bot.h"
 #include "Board.h"
 
-Bot::Bot(){
+Bot::Bot(int depth) : MAX_DEPTH(depth){
+    ;
+}
+
+Bot::Bot() : MAX_DEPTH(20){
     ;
 }
 
@@ -16,7 +20,8 @@ int Bot::move(Board *b){
 }
 
 std::pair<Board*, int> Bot::minimize(Board* b){
-    if(b->is_full()) return std::pair<Board*, int>(nullptr, b->get_count().first);
+    if(b->is_full()) return std::pair<Board*, int>(b, b->get_count().first);
+    if(b->get_depth()>=this->MAX_DEPTH) return Bot::evaluate(b);
 
     std::pair<Board*, int> min_found(nullptr, 2147483000);
     std::pair<Board*, int> temp_state;
@@ -24,14 +29,16 @@ std::pair<Board*, int> Bot::minimize(Board* b){
     for(auto x: b->get_neighbors()){
         temp_state = this->maximize(x);
         if(temp_state.second < min_found.second){
-            min_found = temp_state;
+            min_found.second = temp_state.second;
+            min_found.first = x;
         }
     }
     return min_found;
 }
 
 std::pair<Board*, int> Bot::maximize(Board* b){
-    if(b->is_full()) return std::pair<Board*, int>(nullptr, b->get_count().first);
+    if(b->is_full()) return std::pair<Board*, int>(b, b->get_count().first);
+    if(b->get_depth()>=this->MAX_DEPTH) return Bot::evaluate(b);
 
     std::pair<Board*, int> max_found(nullptr, -2147483000);
     std::pair<Board*, int> temp_state;
@@ -39,8 +46,13 @@ std::pair<Board*, int> Bot::maximize(Board* b){
     for(auto x: b->get_neighbors()){
         temp_state = this->minimize(x);
         if(temp_state.second > max_found.second){
-            max_found = temp_state;
+            max_found.second = temp_state.second;
+            max_found.first = x;
         }
     }
     return max_found;
+}
+
+std::pair<Board*, int> Bot::evaluate(Board* b){
+    return std::pair<Board*, int>(b, 0);
 }

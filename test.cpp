@@ -1,14 +1,5 @@
 #include "Board.h"
 
-// prints complete board
-void print_board(int **b){
-    for(int i=0;i<6;i++){
-        for(int j=0;j<7;j++){
-            std::cout << b[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
-}
 
 int main(){
     Board b; // create board
@@ -18,11 +9,12 @@ int main(){
     //     std::cout << std::endl;
     // }
     while (!b.is_full()){
-        printf("alo\n");
         b.move();
-        printf("h\n");
-        print_board(b.get_board());
+        b.print_board();
     }
-    
+    std::pair<int,int> scores = b.get_count();
+
+    printf("\n\nPlayer %d wins!\n\n", scores.first>scores.second ? 1 : 2);
+    printf("Final score:\nPlayer 1: %d\nPlayer 2: %d\n", scores.first, scores.second);
 }
 

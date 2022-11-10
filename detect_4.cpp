@@ -81,14 +81,24 @@ int main(){
     //     count[1] = 0;
     //     find();
     // }
-    tst y;
-    y.s = 4;
-    y.x = new int[4];
-    y.x[0] = 4;
-    tst z;
-    z.operator=(y);    
-    z.x[0] = 6;
-    printf("%x -- %x\n", y.x[0], z.x[0]);
-    cout << count[0] << endl;
-    cout << count[1] << endl;
+    // tst y;
+    // y.s = 4;
+    // y.x = new int[4];
+    // y.x[0] = 4;
+    // tst z;
+    // z.operator=(y);    
+    // z.x[0] = 6;
+    // printf("%x -- %x\n", y.x[0], z.x[0]);
+    // cout << count[0] << endl;
+    // cout << count[1] << endl;
+
+    // int** b = new int*[7];
+    // for(int i=0;i<7;i++){
+    //     b[i] = new int[6];
+    // }
+    int b[7][6];
+
+    for(;;);
+
+    int x;
 }
