@@ -196,5 +196,5 @@ std::pair<int,int> Board::get_count(){
         }
     }
 
-    std::pair<int,int> res(count[0], count[1]);
+    return std::pair<int,int>(count[0], count[1]);
 }

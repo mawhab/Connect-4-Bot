@@ -1,6 +1,8 @@
 #ifndef BOT_H
 #define BOT_H
 #include "Player.h"
+// #include "Board.h"
+class Board;
 
 class Bot: public Player{
     public:

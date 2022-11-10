@@ -1,5 +1,4 @@
-#include "Bot.h"
-#include "Human.h"
+#include "Board.h"
 
 // prints complete board
 void print_board(int **b){
@@ -19,7 +18,9 @@ int main(){
     //     std::cout << std::endl;
     // }
     while (!b.is_full()){
+        printf("alo\n");
         b.move();
+        printf("h\n");
         print_board(b.get_board());
     }
     

@@ -2,7 +2,6 @@
 #define PLAYER_H
 
 #include <iostream>
-#include "Board.h"
 #include <utility>
 
 class Player{
